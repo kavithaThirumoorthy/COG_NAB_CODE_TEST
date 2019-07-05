@@ -1,0 +1,14 @@
+.btc {
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+}
+.mat-column-id, .mat-column-tradeDate,  .mat-column-tradeTime, .mat-column-price {
+  text-align: center;
+  padding: 20px;
+}
+
+.table-items {
+  padding: 5px;
+  text-align: center;
+}

@@ -1,0 +1,50 @@
+<div class="btc">
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tradeDate">
+      <th mat-header-cell *matHeaderCellDef> tradeDate</th>
+      <td mat-cell *matCellDef="let row"> {{row.tradeDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tradeTime">
+      <th mat-header-cell *matHeaderCellDef>tradeTime</th>
+      <td mat-cell *matCellDef="let row"> {{row.tradeTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>price</th>
+      <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <div>
+    <table>
+      <tr >
+        <th class="table-items">Buy</th>
+        <th class="table-items">Sell</th>
+      </tr>
+      <tr>
+        <td class="table-items">{{profitData.buyingRate}}</td>
+        <td class="table-items">{{profitData.sellingRate}}</td>
+      </tr>
+      <tr>
+        <td class="table-items"> {{profitData.buyingTime}} </td>
+        <td class="table-items"> {{profitData.sellingTime}} </td>
+      </tr>
+      <tr>
+        <td> Profit </td>
+        <td class="table-items"> {{profitData.profit}} </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
