@@ -41,6 +41,7 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 			cryptoCurrencyResponseObj.setProfitCalculationAvailable(true);
 			cryptoCurrencyResponseObj.setBuyingRate(CurrencyAnalyserConstant.DOLLOR_SYMBOL + cryptoCurrencyList.get(0).getPrice());
 			cryptoCurrencyResponseObj.setBuyingTime(getFormatedTradeTime(cryptoCurrencyList.get(0).getTradeTime()));
+			cryptoCurrencyResponseObj.setTradeDate(cryptoCurrencyResponseObj.getCryptoCurrTradeDetailsDto().get(0).getTradeDate());
 			calculMaxProfitSellingTime(cryptoCurrencyList, cryptoCurrencyResponseObj);
 		}
 		return cryptoCurrencyResponseObj;

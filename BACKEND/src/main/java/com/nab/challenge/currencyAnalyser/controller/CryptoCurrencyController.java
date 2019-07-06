@@ -47,15 +47,6 @@ public class CryptoCurrencyController {
 		}		
 	}
 	
-	@GetMapping("/cryptoCurrency/currencyDetails/{currencyId}")
-	public List<CryptoCurrTradeDetailsDto> getCurrencyDetails(@PathVariable long currencyId) {
-		List<CryptoCurrTradeDetails> cryptoCurrTradeDetailsList= cryptoCurrencyService.getInfoForGivenCurrency(currencyId);
-		if (CollectionUtils.isNotEmpty(cryptoCurrTradeDetailsList)) {
-			logger.info("getCurrencyDetailsAndProfit::cryptoCurrTradeDetailsList list Size =>{}", cryptoCurrTradeDetailsList.size());
-			return cryptoCurrencyService.getDetailsForGivenCurrency(cryptoCurrTradeDetailsList);
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Currency Information not found in DataBase ");
-		}		
-	}
+
 	
 }

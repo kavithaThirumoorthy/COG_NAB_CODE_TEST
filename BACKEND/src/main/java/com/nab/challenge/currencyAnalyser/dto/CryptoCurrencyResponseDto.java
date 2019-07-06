@@ -9,6 +9,9 @@ public class CryptoCurrencyResponseDto {
 	String buyingTime;
 	String sellingTime;
 	String profit;
+	String tradeDate;
+	
+
 	List<CryptoCurrTradeDetailsDto> cryptoCurrTradeDetailsDto;
 	boolean profitCalculationAvailable;
 	public boolean isProfitCalculationAvailable() {
@@ -66,5 +69,11 @@ public class CryptoCurrencyResponseDto {
 	public void setProfit(String profit) {
 		this.profit = profit;
 	}
+	public String getTradeDate() {
+		return tradeDate;
+	}
 
+	public void setTradeDate(String tradeDate) {
+		this.tradeDate = tradeDate;
+	}
 }
