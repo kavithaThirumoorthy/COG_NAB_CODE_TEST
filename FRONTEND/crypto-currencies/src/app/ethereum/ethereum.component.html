@@ -41,7 +41,7 @@
 <br>
   <div class="profittab">
       <h1 *ngIf="profitData">Ethereum Profit Advice on  {{profitData.tradeDate}} </h1>
-    <table>
+    <table *ngIf="profitData">
       <tr >
         <th >Buy</th>
         <th >Sell</th>
