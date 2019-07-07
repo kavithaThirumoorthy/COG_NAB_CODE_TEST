@@ -1,4 +1,4 @@
-package com.nab.challange.currencyAnalyser.controller;
+package com.nab.challenge.currencyAnalyser.controller;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

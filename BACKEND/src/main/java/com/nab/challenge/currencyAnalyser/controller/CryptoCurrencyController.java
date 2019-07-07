@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import com.nab.challenge.currencyAnalyser.model.CryptoCurrency;
 import com.nab.challenge.currencyAnalyser.service.CryptoCurrencyService;
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
-public class CryptoCurrencyController {
+public class CryptoCurrencyController  {
 	Logger logger = LoggerFactory.getLogger(CryptoCurrencyController.class);
 	@Autowired
 	private CryptoCurrencyService cryptoCurrencyService;
