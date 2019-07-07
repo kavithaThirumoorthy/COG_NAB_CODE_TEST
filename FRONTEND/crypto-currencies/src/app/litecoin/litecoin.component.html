@@ -1,1 +1,62 @@
-<p>litecoin works!</p>
+
+<mat-toolbar color = "primary">
+
+  <img  class="img" src="../../assets/Litecoin Logo.png" >
+  <span class="but-spacer"></span>
+  <button mat-raised-button class="button" routerLink="/">Home</button>
+</mat-toolbar>
+<br>
+<br>
+<div class="btc">
+    <h1 *ngIf="profitData">Litecoin Trade Details on  {{profitData.tradeDate}}</h1>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="currencyName">
+        <th mat-header-cell *matHeaderCellDef>Currency Name</th>
+        <td mat-cell *matCellDef="let row "> {{row.currencyName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tradeDate">
+      <th mat-header-cell *matHeaderCellDef> Trade Date</th>
+      <td mat-cell *matCellDef="let row"> {{row.tradeDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tradeTime">
+      <th mat-header-cell *matHeaderCellDef>Trade Time</th>
+      <td mat-cell *matCellDef="let row"> {{row.tradeTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+</div>
+<br>
+<br>
+  <div class="profittab">
+      <h1 *ngIf="profitData">Litecoin Profit Advice on  {{profitData.tradeDate}} </h1>
+    <table>
+      <tr >
+        <th >Buy</th>
+        <th >Sell</th>
+      </tr>
+      <tr>
+        <td >{{profitData.buyingRate}}</td>
+        <td >{{profitData.sellingRate}}</td>
+      </tr>
+      <tr>
+        <td > {{profitData.buyingTime}} </td>
+        <td > {{profitData.sellingTime}} </td>
+      </tr>
+      <tr >
+          <th >Profit</th>
+          <th >{{profitData.profit}} </th>
+        </tr>
+  
+    </table>
+  </div>

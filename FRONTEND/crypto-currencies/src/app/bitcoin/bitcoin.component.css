@@ -1,3 +1,4 @@
+
 .btc {
   background-color: lightblue;
   height: 100%;
@@ -8,7 +9,59 @@
   padding: 20px;
 }
 
-.table-items {
-  padding: 5px;
-  text-align: center;
+
+.mat-toolbar.mat-primary {
+  background:black;
+  color: #fff;
+}
+img {
+  width: 600px;
+  height: 60px;
+}
+.btc table {
+  width: 60%;
+}
+.profittab {
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+}
+ .table-items {
+  padding: 2px;
+  text-align: left;
+  width: 100%;
+}
+.profittab table {
+  width: 40%;
+  border-collapse: collapse;
+}
+
+
+.profittab tr { 
+  border: solid;
+  border-width: 1px 0;
+  text-align: left;
+  padding: 2px;
+}
+.profittab tr:first-child {
+  border-top: none;
+}
+.profittab tr:last-child {
+  border-bottom: none;
+}
+
+.profittab th, td {
+  padding: 15px;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  
+  color: white; 
+  text-align: center;  
+  font-size: 16px;
+}
+
+
+.but-spacer {
+  flex: 1 1 auto;
 }
