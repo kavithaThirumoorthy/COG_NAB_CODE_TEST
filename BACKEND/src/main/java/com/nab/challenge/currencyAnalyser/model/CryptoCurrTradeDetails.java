@@ -23,6 +23,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "CRYPTO_CURRENCY_TRADE_DETAILS")
+/**
+ * This class carries transaction information of cuurency
+ * @author User
+ *
+ */
 public class CryptoCurrTradeDetails {
 
 	@Id

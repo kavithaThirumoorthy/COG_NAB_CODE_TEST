@@ -1,6 +1,15 @@
 package com.nab.challenge.currencyAnalyser.controller;
 
-import java.nio.charset.Charset;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,22 +18,19 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import static org.mockito.Mockito.when;
-import com.nab.challenge.currencyAnalyser.controller.CryptoCurrencyController;
+
 import com.nab.challenge.currencyAnalyser.dto.CryptoCurrTradeDetailsDto;
 import com.nab.challenge.currencyAnalyser.dto.CryptoCurrencyResponseDto;
 import com.nab.challenge.currencyAnalyser.model.CryptoCurrTradeDetails;
 import com.nab.challenge.currencyAnalyser.model.CryptoCurrency;
 import com.nab.challenge.currencyAnalyser.service.CryptoCurrencyService;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
+/**
+ * Test class for CryptoCurrencyController
+ * @author kavitha
+ *
+ */
 public class CryptoCurrencyControllerTest {
 
 	@InjectMocks
@@ -42,6 +48,10 @@ public class CryptoCurrencyControllerTest {
 	}
 
 	@Test
+	/**
+	 * this test case tests Not found response returned when the data is not in DB for the method getAllCryptoCurrency method in CryptoCurrencyController
+	 * @throws Exception
+	 */
 	public void testGetAllCryptoCurrency_shouldReturnNotFoundWhenListEmpty() throws Exception {
 		List<CryptoCurrency> cryptoCurrencyList =null;
 		when(cryptoCurrencyService.getAllCryptoCurrency()).thenReturn(cryptoCurrencyList);		 
@@ -52,6 +62,10 @@ public class CryptoCurrencyControllerTest {
 	}
 	
 	@Test
+	/**
+	 * This method test the response for  200 status code and its values for the method getAllCryptoCurrency method in CryptoCurrencyController
+	 * @throws Exception
+	 */
 	public void testGetAllCryptoCurrency_shouldReturnStatusOKWhenListNonEmpty() throws Exception {
 		List<CryptoCurrency> cryptoCurrencyList = new ArrayList<>();
 		CryptoCurrency currency1= new CryptoCurrency();
@@ -82,6 +96,10 @@ public class CryptoCurrencyControllerTest {
 	}
 	
 	@Test
+	/**
+	 * this method tests getCurrencyDetailsAndProfit method in CryptoCurrencyController for 404 response status
+	 * @throws Exception
+	 */
 	public void testGetCurrencyDetailsAndProfit_shouldReturnStatusNotFoundWhenListEmpty() throws Exception {
 		CryptoCurrencyResponseDto cryptoCurrencyResponseDto= new CryptoCurrencyResponseDto();
 		List<CryptoCurrTradeDetailsDto> temp =new ArrayList<>();
@@ -102,6 +120,10 @@ public class CryptoCurrencyControllerTest {
         verifyNoMoreInteractions(cryptoCurrencyService);
 	}
 	@Test
+	/**
+	 * this method tests getCurrencyDetailsAndProfit method in CryptoCurrencyController for 200 response status
+	 * @throws Exception
+	 */
 	public void testGetCurrencyDetailsAndProfit_shouldReturnStatusOKWhenListNonEmpty() throws Exception {
 		CryptoCurrencyResponseDto cryptoCurrencyResponseDto= new CryptoCurrencyResponseDto();
 		List<CryptoCurrTradeDetailsDto> temp =new ArrayList<>();

@@ -1,5 +1,11 @@
 package com.nab.challenge.currencyAnalyser.dto;
 
+/**
+ * This DTO has information regarding  the transaction for a particular currency
+ * @author kavitha
+ *
+ */
+
 public class CryptoCurrTradeDetailsDto {
 
 	private Long id;

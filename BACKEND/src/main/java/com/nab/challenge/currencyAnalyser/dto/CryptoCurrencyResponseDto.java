@@ -1,7 +1,11 @@
 package com.nab.challenge.currencyAnalyser.dto;
 
 import java.util.List;
-
+/**
+ * This is the DTO which carries information from back end to front end
+ * @author Kavitha
+ *
+ */
 public class CryptoCurrencyResponseDto {
 
 	String buyingRate;
@@ -10,9 +14,9 @@ public class CryptoCurrencyResponseDto {
 	String sellingTime;
 	String profit;
 	String tradeDate;
-	
 
 	List<CryptoCurrTradeDetailsDto> cryptoCurrTradeDetailsDto;
+	
 	boolean profitCalculationAvailable;
 	public boolean isProfitCalculationAvailable() {
 		return profitCalculationAvailable;

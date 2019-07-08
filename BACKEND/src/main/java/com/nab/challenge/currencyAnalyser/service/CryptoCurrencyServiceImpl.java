@@ -19,6 +19,11 @@ import com.nab.challenge.currencyAnalyser.repository.CryptoCurrencyRepo;
 import com.nab.challenge.currencyAnalyser.util.CurrencyAnalyserConstant;
 
 @Service
+/**
+ * This is service implementation
+ * @author Kavitha
+ *
+ */
 public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 
 	Logger logger = LoggerFactory.getLogger(CryptoCurrencyServiceImpl.class);
@@ -27,13 +32,22 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 	private CryptoCurrencyRepo cryptoCurrencyRepository;
 	@Autowired
 	private CryptoCurrTradeDetailsRepo cryptoCurrTradeDetailsRepo;
-
+	
 	@Override
+	/**
+	 * This method provide list CryptoCurrTradeDetails 
+	 * @param currencyId
+	 * @return List<CryptoCurrTradeDetails> 
+	 */
 	public List<CryptoCurrTradeDetails> getInfoForGivenCurrency(long cryptoCurrencyID) {
 		return cryptoCurrTradeDetailsRepo.getInfoForGivenCurrency(cryptoCurrencyID);
 	}
 
 	@Override
+	/** This method calculates the profit advice information
+	 * @param List<CryptoCurrTradeDetails>
+	 * @return CryptoCurrencyResponseDto
+	 */
 	public CryptoCurrencyResponseDto getProfitForGivenCurrency(List<CryptoCurrTradeDetails> cryptoCurrencyList) {
 		CryptoCurrencyResponseDto cryptoCurrencyResponseObj = new CryptoCurrencyResponseDto();	
 		cryptoCurrencyResponseObj.setCryptoCurrTradeDetailsDto(mapCryptoCurrTradeDetailsToDto(cryptoCurrencyList));	
@@ -47,24 +61,40 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 		return cryptoCurrencyResponseObj;
 	}
 	@Override
+	/** This method provides currency list basic information
+	 * @return List<CryptoCurrency>
+	 */
 	public List<CryptoCurrency> getAllCryptoCurrency() {
 		return cryptoCurrencyRepository.findAll();
 	}
 
 	@Override
+	/** This method provides currency list transaction  information
+	 * @return List<CryptoCurrTradeDetails>
+	 */
 	public List<CryptoCurrTradeDetails> getAllListCryptoCurrTradeDetails() {
 		return cryptoCurrTradeDetailsRepo.findAll();
 	}
+	/**
+	 * This method is called for calculating profit advice selling information
+	 * @param List<CryptoCurrTradeDetails>
+	 * @param cryptoCurrencyResponseObj
+	 * @return CryptoCurrencyResponseDto
+	 */
 	private CryptoCurrencyResponseDto calculMaxProfitSellingTime(List<CryptoCurrTradeDetails> cryptoCurrencyList, CryptoCurrencyResponseDto cryptoCurrencyResponseObj) {
 		double buyingRate=cryptoCurrencyList.get(0).getPrice();
 		cryptoCurrencyList.remove(0);
-		List<CryptoCurrTradeDetails> cryptoCurrencySortedList = sortCryptoCurrTradeDetails(cryptoCurrencyList);	
+		List<CryptoCurrTradeDetails> cryptoCurrencySortedList = sortCryptoCurrTradeDetailsBasedOnPrice(cryptoCurrencyList);	
 		cryptoCurrencyResponseObj.setSellingRate(CurrencyAnalyserConstant.DOLLOR_SYMBOL + cryptoCurrencyList.get(cryptoCurrencySortedList.size()-1).getPrice());
 		cryptoCurrencyResponseObj.setSellingTime(getFormatedTradeTime( cryptoCurrencySortedList.get(cryptoCurrencySortedList.size()-1).getTradeTime()));
 		cryptoCurrencyResponseObj.setProfit(CurrencyAnalyserConstant.DOLLOR_SYMBOL+CurrencyAnalyserConstant.TWO_DECIMAL.format((cryptoCurrencyList.get(cryptoCurrencySortedList.size()-1).getPrice()-buyingRate)));
 		return cryptoCurrencyResponseObj;
 	}
-
+/**
+ * This method provide mapping between entity and DTO
+ * @param List<CryptoCurrTradeDetails> 
+ * @return List<CryptoCurrTradeDetailsDto>
+ */
 	private List<CryptoCurrTradeDetailsDto> mapCryptoCurrTradeDetailsToDto(List<CryptoCurrTradeDetails> cryptoCurrencyList) {
 		List<CryptoCurrTradeDetailsDto> cryptoCurrTradeDetailsDtoList = cryptoCurrencyList.stream().map(currencyVal -> {			
 			CryptoCurrTradeDetailsDto cryptoCurrTradeDetailsDto= new CryptoCurrTradeDetailsDto();
@@ -78,6 +108,11 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 		return cryptoCurrTradeDetailsDtoList;
 	}
 
+	/**
+	 * This method formats the time for UI display
+	 * @param tradeTime
+	 * @return String
+	 */
 	private String getFormatedTradeTime(String tradeTime) {
 
 		try {
@@ -93,8 +128,13 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 		return tradeTime;
 		
 	}
+	/**
+	 * this method sorts List<CryptoCurrTradeDetails> based on price ascending order
+	 * @param  List<CryptoCurrTradeDetails>
+	 * @return List<CryptoCurrTradeDetails>
+	 */
 
-	private List<CryptoCurrTradeDetails> sortCryptoCurrTradeDetails(List<CryptoCurrTradeDetails> cryptoCurrencyList) {
+	private List<CryptoCurrTradeDetails> sortCryptoCurrTradeDetailsBasedOnPrice(List<CryptoCurrTradeDetails> cryptoCurrencyList) {
 		cryptoCurrencyList.sort(new Comparator<CryptoCurrTradeDetails>() {
 			@Override
 			public int compare(CryptoCurrTradeDetails cur1, CryptoCurrTradeDetails cur2) {
@@ -111,11 +151,8 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 
 	}
 
-	@Override
-	public List<CryptoCurrTradeDetailsDto> getDetailsForGivenCurrency(List<CryptoCurrTradeDetails> cryptoCurrencyList) {	
-		return mapCryptoCurrTradeDetailsToDto(cryptoCurrencyList);
-	}
-
+	
+	
 	
 
 }

@@ -4,6 +4,11 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * This class has all constants used in this application
+ * @author Kavitha
+ *
+ */
 public class CurrencyAnalyserConstant {
 	
 	public static final DecimalFormat TWO_DECIMAL = new DecimalFormat("0.00");

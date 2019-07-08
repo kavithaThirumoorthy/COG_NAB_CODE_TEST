@@ -18,6 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "CRYPTO_CURRENCY")
+/**
+ * This is a entity which carries basic info of a currency 
+ * @author Kavitha
+ *
+ */
 public class CryptoCurrency {
 
 	@Id
