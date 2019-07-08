@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.nab.challenge.currencyAnalyser.dto.CryptoCurrTradeDetailsDto;
 import com.nab.challenge.currencyAnalyser.dto.CryptoCurrencyResponseDto;
 import com.nab.challenge.currencyAnalyser.model.CryptoCurrTradeDetails;
@@ -53,8 +54,9 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 		cryptoCurrencyResponseObj.setCryptoCurrTradeDetailsDto(mapCryptoCurrTradeDetailsToDto(cryptoCurrencyList));	
 		if (cryptoCurrencyList.size() > 1) {
 			cryptoCurrencyResponseObj.setProfitCalculationAvailable(true);
-			cryptoCurrencyResponseObj.setBuyingRate(CurrencyAnalyserConstant.DOLLOR_SYMBOL + cryptoCurrencyList.get(0).getPrice());
-			cryptoCurrencyResponseObj.setBuyingTime(getFormatedTradeTime(cryptoCurrencyList.get(0).getTradeTime()));
+			List<CryptoCurrTradeDetails> sortedBasedOnTime=sortCryptoCurrTradeDetailsBasedOnTime(cryptoCurrencyList);
+			cryptoCurrencyResponseObj.setBuyingRate(CurrencyAnalyserConstant.DOLLOR_SYMBOL + sortedBasedOnTime.get(0).getPrice());
+			cryptoCurrencyResponseObj.setBuyingTime(getFormatedTradeTime(sortedBasedOnTime.get(0).getTradeTime()));
 			cryptoCurrencyResponseObj.setTradeDate(cryptoCurrencyResponseObj.getCryptoCurrTradeDetailsDto().get(0).getTradeDate());
 			calculMaxProfitSellingTime(cryptoCurrencyList, cryptoCurrencyResponseObj);
 		}
@@ -151,8 +153,27 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 
 	}
 
-	
-	
-	
+	/**
+	 * this method sorts List<CryptoCurrTradeDetails> based on time ascending order
+	 * @param cryptoCurrencyList
+	 * @return
+	 */
+	private static List<CryptoCurrTradeDetails> sortCryptoCurrTradeDetailsBasedOnTime(List<CryptoCurrTradeDetails> cryptoCurrencyList) {
+		cryptoCurrencyList.sort(new Comparator<CryptoCurrTradeDetails>() {
+			@Override
+			public int compare(CryptoCurrTradeDetails cur1, CryptoCurrTradeDetails cur2) {
+				int delta = Integer.parseInt(cur1.getTradeTime())  - Integer.parseInt(cur2.getTradeTime()) ;
+				if (delta > 0)
+					return 1;
+				if (delta < 0)
+					return -1;
+				return 0;
+			}
+		});
+
+		return cryptoCurrencyList;
+
+	}
+
 
 }

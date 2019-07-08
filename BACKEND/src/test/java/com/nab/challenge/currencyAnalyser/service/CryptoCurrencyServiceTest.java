@@ -45,6 +45,7 @@ public class CryptoCurrencyServiceTest {
 	private CryptoCurrencyRepo cryptoCurrencyRepository;
 	List<CryptoCurrTradeDetails> cryptoCurrTradeDetailsList = new ArrayList<>();
 	List<CryptoCurrTradeDetails> cryptoCurrTradeDetailsListOne = new ArrayList<>();
+	List<CryptoCurrTradeDetails> cryptoCurrTradeDetailsListforTimeSort = new ArrayList<>();
 
 	@Before
 	/**
@@ -94,6 +95,10 @@ public class CryptoCurrencyServiceTest {
 		cryptoCurrTradeDetails5.setTradeTime("1530");
 		cryptoCurrTradeDetailsList.add(cryptoCurrTradeDetails5);
 		cryptoCurrTradeDetailsListOne.add(cryptoCurrTradeDetails5);
+		cryptoCurrTradeDetailsListforTimeSort.add(cryptoCurrTradeDetails3);
+		cryptoCurrTradeDetailsListforTimeSort.add(cryptoCurrTradeDetails2);
+		cryptoCurrTradeDetailsListforTimeSort.add(cryptoCurrTradeDetails4);
+		cryptoCurrTradeDetailsListforTimeSort.add(cryptoCurrTradeDetails);
 
 	}
 
@@ -236,5 +241,21 @@ public class CryptoCurrencyServiceTest {
 		List<CryptoCurrTradeDetails> temp = (List<CryptoCurrTradeDetails>) method.invoke(cryptoCurrencyService,
 				cryptoCurrTradeDetailsList);
 		assertEquals(37.01, temp.get(4).getPrice(), 0.001);
+	}
+	
+	@Test
+	/**
+	 * this method test sortCryptoCurrTradeDetailsBasedOnPrice of CryptoCurrencyServiceImpl.
+	 * Since this method is  private method, it is tested with reflection concept.
+	 */
+	public void sortCryptoCurrTradeDetailsBasedOnTime() throws NoSuchMethodException, SecurityException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+		Method method = CryptoCurrencyServiceImpl.class.getDeclaredMethod("sortCryptoCurrTradeDetailsBasedOnTime", List.class);
+		method.setAccessible(true);
+		@SuppressWarnings("unchecked")
+		List<CryptoCurrTradeDetails> temp = (List<CryptoCurrTradeDetails>) method.invoke(cryptoCurrencyService,
+				cryptoCurrTradeDetailsListforTimeSort);
+		assertEquals("0915", temp.get(0).getTradeTime());
 	}
 }
